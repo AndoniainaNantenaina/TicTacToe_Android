@@ -17,6 +17,7 @@ import com.example.project.MainActivity;
 
 import java.net.Inet4Address;
 import java.util.ArrayList;
+import java.util.Random;
 
 class Case {
     public boolean isDrawed = false;
@@ -162,17 +163,16 @@ public class DrawView extends View {
             //  Itération sur les tableaux
             for (int tX = 0; tX < tabX.size(); tX++)
             {
-                System.out.println("Coords : ");
-                System.out.println("X : " + tabX.get(tX));
-                System.out.println("Y : " + tabY.get(tX));
-
                 obj.setStyle(Paint.Style.STROKE);
                 obj.setStrokeWidth(15);
+
                 if ((tX & 1) == 0) {
                     obj.setColor(Color.GREEN);
                     obj.setTextSize(18);
-                    canvas.drawText("X",tabX.get(tX),
-                            tabY.get(tX),obj );
+                    canvas.drawText("X",
+                            tabX.get(tX),
+                            tabY.get(tX),
+                            obj );
 
                     matrice[tabIndexX.get(tX)][tabIndexY.get(tX)].drawType = "X";
 
@@ -376,6 +376,36 @@ public class DrawView extends View {
 
             return true;
         }
+        else if (event.getAction() == MotionEvent.ACTION_UP)
+        {
+            int randomX = -1;
+            int randomY = -1;
+
+            randomX = new Random().nextInt(CASE_NUMBER);
+            randomY = new Random().nextInt(CASE_NUMBER);
+
+            if (matrice[randomX][randomY].drawType.equals(""))
+            {
+                tabX.add(matrice[randomX][randomY].centerX);
+                tabY.add(matrice[randomX][randomY].centerY);
+                tabIndexX.add(randomX);
+                tabIndexY.add(randomY);
+            }
+            else {
+                randomX = new Random().nextInt(CASE_NUMBER);
+                randomY = new Random().nextInt(CASE_NUMBER);
+
+                tabX.add(matrice[randomX][randomY].centerX);
+                tabY.add(matrice[randomX][randomY].centerY);
+                tabIndexX.add(randomX);
+                tabIndexY.add(randomY);
+            }
+
+            System.out.println("RANDOM X => " + randomX);
+            System.out.println("RANDOM Y => " + randomY);
+
+            invalidate();
+        }
 
         return true;
     }
@@ -404,7 +434,7 @@ public class DrawView extends View {
             }
         }
 
-        /*//  Itération sur X
+        //  Itération sur X
         for (int x=0; x < CASE_NUMBER; x++)
         {
             if (matrice[indexX][x].drawType.equals(drawType))
@@ -420,7 +450,7 @@ public class DrawView extends View {
             {
                 nbCheckedY++;
             }
-        }*/
+        }
 
         if (nbCheckedX == CASE_NUMBER)
         {
@@ -462,7 +492,4 @@ public class DrawView extends View {
         endingView.putExtra("goalUsernane", userGoalName);
         mContext.startActivity(endingView);
     }
-
-    public void checkDiagonal()
-    {}
 }
