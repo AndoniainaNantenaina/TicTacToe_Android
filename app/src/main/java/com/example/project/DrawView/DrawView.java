@@ -92,7 +92,7 @@ public class DrawView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.GRAY);
         obj.setColor(Color.GREEN);
 
 
@@ -145,7 +145,7 @@ public class DrawView extends View {
                     }
                     //paint.setStyle(Paint.Style.STROKE);
                     // paint.setStrokeWidth(20);
-                    paint.setColor(Color.BLACK);
+                    paint.setColor(Color.GRAY);
                     left = left + casePixel;
                     right = right + casePixel;
                 }
@@ -163,9 +163,12 @@ public class DrawView extends View {
             //  Itération sur les tableaux
             for (int tX = 0; tX < tabX.size(); tX++)
             {
+                System.out.println("Tx nombre : "+ tX);
                 obj.setStyle(Paint.Style.STROKE);
                 obj.setStrokeWidth(15);
-
+                if(tabX.size() == (CASE_NUMBER * CASE_NUMBER) ){
+                    showEndingScreen("NULL");
+                }
                 if ((tX & 1) == 0) {
                     obj.setColor(Color.GREEN);
                     obj.setTextSize(18);
@@ -178,9 +181,6 @@ public class DrawView extends View {
 
                     if (checkGoal(indexX, indexY, "X") == isXFound)
                     {
-                        System.out.println("VERT X GOAL ! ");
-                        System.out.println(CASE_NUMBER);
-
                         //  Itération pour vérification
                         for (int v = 0; v < CASE_NUMBER; v++)
                         {
@@ -200,9 +200,6 @@ public class DrawView extends View {
                     }
                     else if (checkGoal(indexX, indexY, "X") == isYFound)
                     {
-                        System.out.println("VERT Y GOAL ! ");
-                        System.out.println(CASE_NUMBER);
-
                         //  Itération pour vérification
                         for (int v = 0; v < CASE_NUMBER; v++)
                         {
@@ -239,9 +236,6 @@ public class DrawView extends View {
 
                     if (checkGoal(indexX, indexY, "O") == isXFound)
                     {
-                        System.out.println("ROUGE X GOAL ! ");
-                        System.out.println(CASE_NUMBER);
-
                         //  Itération pour vérification
                         for (int v = 0; v < CASE_NUMBER; v++)
                         {
@@ -261,9 +255,6 @@ public class DrawView extends View {
                     }
                     else if (checkGoal(indexX, indexY, "O") == isYFound)
                     {
-                        System.out.println("ROUGE Y GOAL ! ");
-                        System.out.println(CASE_NUMBER);
-
                         //  Itération pour vérification
                         for (int v = 0; v < CASE_NUMBER; v++)
                         {
@@ -285,12 +276,8 @@ public class DrawView extends View {
                     {
                         showEndingScreen("RED");
                     }
-
-                   if(tX == (CASE_NUMBER * CASE_NUMBER) - 1){
-
-                        showEndingScreen("MATCH NULL");
-                   }
                 }
+
             }
         }
     }
@@ -378,13 +365,28 @@ public class DrawView extends View {
         }
         else if (event.getAction() == MotionEvent.ACTION_UP)
         {
+
             int randomX = -1;
             int randomY = -1;
 
             randomX = new Random().nextInt(CASE_NUMBER);
             randomY = new Random().nextInt(CASE_NUMBER);
-
-            if (matrice[randomX][randomY].drawType.equals(""))
+            boolean caseIsEmpty = false;
+            while(!caseIsEmpty){
+                randomX = new Random().nextInt(CASE_NUMBER);
+                randomY = new Random().nextInt(CASE_NUMBER);
+                if(matrice[randomX][randomY].drawType.equals("")){
+                    tabX.add(matrice[randomX][randomY].centerX);
+                    tabY.add(matrice[randomX][randomY].centerY);
+                    tabIndexX.add(randomX);
+                    tabIndexY.add(randomY);
+                    break;
+                }
+                else{
+                    caseIsEmpty = false;
+                }
+            }
+            /*if (matrice[randomX][randomY].drawType.equals(""))
             {
                 tabX.add(matrice[randomX][randomY].centerX);
                 tabY.add(matrice[randomX][randomY].centerY);
@@ -399,7 +401,7 @@ public class DrawView extends View {
                 tabY.add(matrice[randomX][randomY].centerY);
                 tabIndexX.add(randomX);
                 tabIndexY.add(randomY);
-            }
+            }*/
 
             System.out.println("RANDOM X => " + randomX);
             System.out.println("RANDOM Y => " + randomY);
@@ -417,20 +419,24 @@ public class DrawView extends View {
         int nbCheckedDiag = 0;
         int nbCheckedDiagReverse = 0;
 
-        for (int x=0; x < CASE_NUMBER; x++)
-        {
-            if (matrice[x][x].drawType.equals(drawType))
+        if(indexX == indexY){
+            for (int x=0; x < CASE_NUMBER; x++)
             {
-                nbCheckedDiag++;
+                if (matrice[x][x].drawType.equals(drawType))
+                {
+                    nbCheckedDiag++;
+                }
             }
         }
 
-        for (int x=CASE_NUMBER-1; x >= 0; x--)
-        {
-            int iY = (CASE_NUMBER - 1) - x;
-            if (matrice[x][iY].drawType.equals(drawType))
+        if(indexX + indexY == CASE_NUMBER-1){
+            for (int x=CASE_NUMBER-1; x >= 0; x--)
             {
-                nbCheckedDiagReverse++;
+                int iY = (CASE_NUMBER - 1) - x;
+                if (matrice[x][iY].drawType.equals(drawType))
+                {
+                    nbCheckedDiagReverse++;
+                }
             }
         }
 
