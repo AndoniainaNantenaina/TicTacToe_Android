@@ -92,7 +92,8 @@ public class DrawView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        paint.setColor(Color.GRAY);
+       // paint.setColor(Color.rgb(204, 172, 0));
+        paint.setColor(Color.rgb(240, 117, 15 ));
         obj.setColor(Color.GREEN);
 
 
@@ -119,9 +120,7 @@ public class DrawView extends View {
         System.out.println("CasePixel: " + casePixel);
         System.out.println("Screen Width: " + screenWidth);
         for (int i=0;i<(boardsize*boardsize);i++){
-
             while (x< boardsize){
-
                 for (int y=0; y < boardsize; y++){
 
                     //  Draw Case
@@ -145,7 +144,8 @@ public class DrawView extends View {
                     }
                     //paint.setStyle(Paint.Style.STROKE);
                     // paint.setStrokeWidth(20);
-                    paint.setColor(Color.GRAY);
+                    // paint.setColor(Color.rgb(204, 172, 0));
+                    paint.setColor(Color.rgb(240, 117, 15 ));
                     left = left + casePixel;
                     right = right + casePixel;
                 }
