@@ -27,17 +27,8 @@ public class MainActivity extends AppCompatActivity {
         drawingView.setCASE_NUMBER(caseNumber);
         drawingView.setScreenWidth(screenWidth);
 
-        /*ConstraintLayout cl= (ConstraintLayout) findViewById(R.id.launchGame);
-        switch (caseNumber){
-            case 3:
-                cl.setBackgroundResource(R.drawable.paint);
-                break;
-            case 4:
-                cl.setBackgroundResource(R.drawable.sary);
-                break;
-            default:
-                cl.setBackgroundColor(Color.RED);
-        }*/
+       /* ConstraintLayout cl= (ConstraintLayout) findViewById(R.id.launchGame);
+        cl.setBackgroundColor(Color.rgb(152, 142, 117));*/
 
     }
 }

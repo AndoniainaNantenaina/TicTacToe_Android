@@ -5,8 +5,13 @@
       <map>
         <entry key="..\:/ESTI/M1/Android/Project/app/src/main/res/layout/activity_ending.xml" value="0.13333333333333333" />
         <entry key="..\:/ESTI/M1/Android/Project/app/src/main/res/layout/activity_launch.xml" value="0.13333333333333333" />
+<<<<<<< HEAD
+        <entry key="..\:/Project2.0/TicTacToe_Android/app/src/main/res/drawable/gradient_background.xml" value="0.1" />
+        <entry key="..\:/Project2.0/TicTacToe_Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
+=======
         <entry key="..\:/ESTI/M1/Android/TicTacToe_Android/app/src/main/res/layout/activity_ending.xml" value="0.2" />
         <entry key="..\:/ESTI/M1/Android/TicTacToe_Android/app/src/main/res/layout/activity_launch.xml" value="0.17074275362318841" />
+>>>>>>> 6dba9e73752ca1d2f7638e611b18d11d3c4d6595
         <entry key="..\:/Users/DIAMONDRA/AndroidStudioProjects/Project/app/src/main/res/layout/activity_ending.xml" value="0.1" />
         <entry key="..\:/Users/DIAMONDRA/AndroidStudioProjects/Project/app/src/main/res/layout/activity_launch.xml" value="0.11775362318840579" />
         <entry key="..\:/Users/DIAMONDRA/AndroidStudioProjects/Project/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
