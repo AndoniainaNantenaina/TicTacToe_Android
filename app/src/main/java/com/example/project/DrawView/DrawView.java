@@ -59,7 +59,7 @@ public class DrawView extends View {
     int isYFound = 2;
     int isDiagFound = 3;
     int isNotFound = 0;
-
+    boolean flag = false;
     Paint paint = new Paint();
     Paint obj = new Paint();
 
@@ -289,7 +289,6 @@ public class DrawView extends View {
         {
             touchX = (int)event.getX();
             touchY = (int)event.getY();
-            //boolean isDraw = false;
 
             System.out.println("TouchX = " + touchX);
             System.out.println("TouchY = " + touchY);
@@ -321,6 +320,7 @@ public class DrawView extends View {
                         tabIndexY.add(indexY);
 
                         invalidate();
+                        flag = true;
                         return true;
                     }
                 }
@@ -365,48 +365,51 @@ public class DrawView extends View {
         }
         else if (event.getAction() == MotionEvent.ACTION_UP)
         {
+            System.out.println(flag);
+            if (flag)
+            {
+                int randomX = -1;
+                int randomY = -1;
 
-            int randomX = -1;
-            int randomY = -1;
-
-            randomX = new Random().nextInt(CASE_NUMBER);
-            randomY = new Random().nextInt(CASE_NUMBER);
-            boolean caseIsEmpty = false;
-            while(!caseIsEmpty){
                 randomX = new Random().nextInt(CASE_NUMBER);
                 randomY = new Random().nextInt(CASE_NUMBER);
-                if(matrice[randomX][randomY].drawType.equals("")){
+                boolean caseIsEmpty = false;
+                while(!caseIsEmpty){
+                    randomX = new Random().nextInt(CASE_NUMBER);
+                    randomY = new Random().nextInt(CASE_NUMBER);
+                    if(matrice[randomX][randomY].drawType.equals("")){
+                        tabX.add(matrice[randomX][randomY].centerX);
+                        tabY.add(matrice[randomX][randomY].centerY);
+                        tabIndexX.add(randomX);
+                        tabIndexY.add(randomY);
+                        break;
+                    }
+                    else{
+                        caseIsEmpty = false;
+                    }
+                }
+                /*if (matrice[randomX][randomY].drawType.equals(""))
+                {
                     tabX.add(matrice[randomX][randomY].centerX);
                     tabY.add(matrice[randomX][randomY].centerY);
                     tabIndexX.add(randomX);
                     tabIndexY.add(randomY);
-                    break;
                 }
-                else{
-                    caseIsEmpty = false;
-                }
+                else {
+                    randomX = new Random().nextInt(CASE_NUMBER);
+                    randomY = new Random().nextInt(CASE_NUMBER);
+
+                    tabX.add(matrice[randomX][randomY].centerX);
+                    tabY.add(matrice[randomX][randomY].centerY);
+                    tabIndexX.add(randomX);
+                    tabIndexY.add(randomY);
+                }*/
+
+                System.out.println("RANDOM X => " + randomX);
+                System.out.println("RANDOM Y => " + randomY);
+                flag = false;
+                invalidate();
             }
-            /*if (matrice[randomX][randomY].drawType.equals(""))
-            {
-                tabX.add(matrice[randomX][randomY].centerX);
-                tabY.add(matrice[randomX][randomY].centerY);
-                tabIndexX.add(randomX);
-                tabIndexY.add(randomY);
-            }
-            else {
-                randomX = new Random().nextInt(CASE_NUMBER);
-                randomY = new Random().nextInt(CASE_NUMBER);
-
-                tabX.add(matrice[randomX][randomY].centerX);
-                tabY.add(matrice[randomX][randomY].centerY);
-                tabIndexX.add(randomX);
-                tabIndexY.add(randomY);
-            }*/
-
-            System.out.println("RANDOM X => " + randomX);
-            System.out.println("RANDOM Y => " + randomY);
-
-            invalidate();
         }
 
         return true;

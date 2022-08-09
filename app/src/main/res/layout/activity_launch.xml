@@ -6,43 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".LaunchActivity">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center_vertical"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="118dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenue dans TICTACTOE" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veuillez choisir le nombre de grille" />
+
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/tictactoe256" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bienvenue dans TICTACTOE" />
+        <Button
+            android:id="@+id/button4x4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="launch4x4"
+            android:text="4x4" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Veuillez choisir le nombre de grille" />
-
-            <Button
-                android:id="@+id/button4x4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="launch4x4"
-                android:text="4x4" />
-
-            <Button
-                android:id="@+id/button3x3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="launch3x3"
-                android:text="3x3" />
-        </LinearLayout>
-    </FrameLayout>
+        <Button
+            android:id="@+id/button3x3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="launch3x3"
+            android:text="3x3" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
