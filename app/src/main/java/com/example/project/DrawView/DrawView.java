@@ -181,45 +181,24 @@ public class DrawView extends View {
 
                     if (checkGoal(indexX, indexY, "X") == isXFound)
                     {
-                        //  Itération pour vérification
-                        for (int v = 0; v < CASE_NUMBER; v++)
-                        {
-                            Paint p = new Paint();
-                            p.setColor(Color.GREEN);
-                            canvas.drawRect(
-                                    matrice[tabIndexX.get(tX)][v].left,
-                                    matrice[tabIndexX.get(tX)][v].top,
-                                    matrice[tabIndexX.get(tX)][v].right,
-                                    matrice[tabIndexX.get(tX)][v].bottom,
-                                    p
-                            );
-                        }
+                        setVictory(tX, canvas, Color.GREEN, isXFound);
 
                         //  Afficher l'activité final
                         showEndingScreen("GAGNANT : CROIX VERT");
+                        break;
                     }
                     else if (checkGoal(indexX, indexY, "X") == isYFound)
                     {
-                        //  Itération pour vérification
-                        for (int v = 0; v < CASE_NUMBER; v++)
-                        {
-                            Paint p = new Paint();
-                            p.setColor(Color.GREEN);
-                            canvas.drawRect(
-                                    matrice[v][tabIndexY.get(tX)].left,
-                                    matrice[v][tabIndexY.get(tX)].top,
-                                    matrice[v][tabIndexY.get(tX)].right,
-                                    matrice[v][tabIndexY.get(tX)].bottom,
-                                    p
-                            );
-                        }
+                        setVictory(tX, canvas, Color.GREEN, isYFound);
 
                         //  Afficher l'activité final
-                        showEndingScreen("GAGNANT : ROND ROUGE");
+                        showEndingScreen("GAGNANT : CROIX VERT");
+                        break;
                     }
                     else if (checkGoal(indexX, indexY, "X") == isDiagFound)
                     {
                         showEndingScreen("GAGNANT : CROIX VERT");
+                        break;
                     }
                 }
                 else
@@ -236,45 +215,24 @@ public class DrawView extends View {
 
                     if (checkGoal(indexX, indexY, "O") == isXFound)
                     {
-                        //  Itération pour vérification
-                        for (int v = 0; v < CASE_NUMBER; v++)
-                        {
-                            Paint p = new Paint();
-                            p.setColor(Color.RED);
-                            canvas.drawRect(
-                                    matrice[tabIndexX.get(tX)][v].left,
-                                    matrice[tabIndexX.get(tX)][v].top,
-                                    matrice[tabIndexX.get(tX)][v].right,
-                                    matrice[tabIndexX.get(tX)][v].bottom,
-                                    p
-                            );
-                        }
+                        setVictory(tX, canvas, Color.RED, isXFound);
 
                         //  Afficher l'activité final
                         showEndingScreen("GAGNANT : ROND ROUGE");
+                        break;
                     }
                     else if (checkGoal(indexX, indexY, "O") == isYFound)
                     {
-                        //  Itération pour vérification
-                        for (int v = 0; v < CASE_NUMBER; v++)
-                        {
-                            Paint p = new Paint();
-                            p.setColor(Color.RED);
-                            canvas.drawRect(
-                                    matrice[v][tabIndexY.get(tX)].left,
-                                    matrice[v][tabIndexY.get(tX)].top,
-                                    matrice[v][tabIndexY.get(tX)].right,
-                                    matrice[v][tabIndexY.get(tX)].bottom,
-                                    p
-                            );
-                        }
+                        setVictory(tX, canvas, Color.RED, isYFound);
 
                         //  Afficher l'activité final
                         showEndingScreen("GAGNANT : ROND ROUGE");
+                        break;
                     }
                     else if (checkGoal(indexX, indexY, "O") == isDiagFound)
                     {
                         showEndingScreen("GAGNANT : ROND ROUGE");
+                        break;
                     }
                 }
 
@@ -326,41 +284,6 @@ public class DrawView extends View {
                 }
             }
 
-            /*//  Itération sur le tableau de case
-            for (int t = 0; t <= TabCases.size(); t++)
-            {
-
-                if (touchX <= TabCases.get(t).right
-                        && touchX >= TabCases.get(t).left
-                        && touchY <= TabCases.get(t).bottom
-                        && touchY >= TabCases.get(t).top
-                )
-                {
-                    touchX = TabCases.get(t).left + (
-                            (TabCases.get(t).right - TabCases.get(t).left) / 2);
-                    touchY = TabCases.get(t).top + (
-                            (TabCases.get(t).bottom - TabCases.get(t).top) / 2 );
-
-                    //  Ajouter les coords dans les tableaux
-                    for(int i=0; i<tabX.size(); i++){
-                        if(tabX.get(i)==touchX && tabY.get(i) == touchY){
-                           isDraw = true;
-                        }
-                    }
-                    if(!isDraw){
-                        tabX.add(touchX);
-                        tabY.add(touchY);
-                    }
-
-                   // TabCases.get(t).isDrawed = true;
-
-                    invalidate();
-                    return true;
-                }
-
-
-            }*/
-
             return true;
         }
         else if (event.getAction() == MotionEvent.ACTION_UP)
@@ -388,22 +311,6 @@ public class DrawView extends View {
                         caseIsEmpty = false;
                     }
                 }
-                /*if (matrice[randomX][randomY].drawType.equals(""))
-                {
-                    tabX.add(matrice[randomX][randomY].centerX);
-                    tabY.add(matrice[randomX][randomY].centerY);
-                    tabIndexX.add(randomX);
-                    tabIndexY.add(randomY);
-                }
-                else {
-                    randomX = new Random().nextInt(CASE_NUMBER);
-                    randomY = new Random().nextInt(CASE_NUMBER);
-
-                    tabX.add(matrice[randomX][randomY].centerX);
-                    tabY.add(matrice[randomX][randomY].centerY);
-                    tabIndexX.add(randomX);
-                    tabIndexY.add(randomY);
-                }*/
 
                 System.out.println("RANDOM X => " + randomX);
                 System.out.println("RANDOM Y => " + randomY);
@@ -500,5 +407,47 @@ public class DrawView extends View {
         Intent endingView = new Intent(mContext, EndingActivity.class);
         endingView.putExtra("goalUsernane", userGoalName);
         mContext.startActivity(endingView);
+    }
+
+    public void setVictory(int tX, Canvas canvas, int color, int foundType)
+    {
+        //System.out.println("Case number = "+ CASE_NUMBER);
+
+        if (foundType == isXFound)
+        {
+            System.out.println("VICTORY : X FOUND");
+
+            //  Itération pour vérification
+            for (int v = 0; v < CASE_NUMBER; v++)
+            {
+                Paint p = new Paint();
+                p.setColor(color);
+                canvas.drawRect(
+                        matrice[tabIndexY.get(tX)][v].left,
+                        matrice[tabIndexY.get(tX)][v].top,
+                        matrice[tabIndexY.get(tX)][v].right,
+                        matrice[tabIndexY.get(tX)][v].bottom,
+                        p
+                );
+            }
+        }
+        else if (foundType == isYFound)
+        {
+            System.out.println("VICTORY : Y FOUND");
+
+            //  Itération pour vérification
+            for (int v = 0; v < CASE_NUMBER; v++)
+            {
+                Paint p = new Paint();
+                p.setColor(color);
+                canvas.drawRect(
+                        matrice[v][tabIndexY.get(tX)].left,
+                        matrice[v][tabIndexY.get(tX)].top,
+                        matrice[v][tabIndexY.get(tX)].right,
+                        matrice[v][tabIndexY.get(tX)].bottom,
+                        p
+                );
+            }
+        }
     }
 }
