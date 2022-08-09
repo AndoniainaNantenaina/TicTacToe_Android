@@ -21,12 +21,6 @@
             app:srcCompat="@drawable/victorytrophy256" />
 
         <TextView
-            android:id="@+id/gameEndingText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GAGNANT" />
-
-        <TextView
             android:id="@+id/userGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -167,7 +167,7 @@ public class DrawView extends View {
                 obj.setStyle(Paint.Style.STROKE);
                 obj.setStrokeWidth(15);
                 if(tabX.size() == (CASE_NUMBER * CASE_NUMBER) ){
-                    showEndingScreen("NULL");
+                    showEndingScreen("MATCH NULL");
                 }
                 if ((tX & 1) == 0) {
                     obj.setColor(Color.GREEN);
@@ -196,7 +196,7 @@ public class DrawView extends View {
                         }
 
                         //  Afficher l'activité final
-                        showEndingScreen("GREEN");
+                        showEndingScreen("GAGNANT : CROIX VERT");
                     }
                     else if (checkGoal(indexX, indexY, "X") == isYFound)
                     {
@@ -215,11 +215,11 @@ public class DrawView extends View {
                         }
 
                         //  Afficher l'activité final
-                        showEndingScreen("GREEN");
+                        showEndingScreen("GAGNANT : ROND ROUGE");
                     }
                     else if (checkGoal(indexX, indexY, "X") == isDiagFound)
                     {
-                        showEndingScreen("GREEN");
+                        showEndingScreen("GAGNANT : CROIX VERT");
                     }
                 }
                 else
@@ -251,7 +251,7 @@ public class DrawView extends View {
                         }
 
                         //  Afficher l'activité final
-                        showEndingScreen("RED");
+                        showEndingScreen("GAGNANT : ROND ROUGE");
                     }
                     else if (checkGoal(indexX, indexY, "O") == isYFound)
                     {
@@ -270,11 +270,11 @@ public class DrawView extends View {
                         }
 
                         //  Afficher l'activité final
-                        showEndingScreen("RED");
+                        showEndingScreen("GAGNANT : ROND ROUGE");
                     }
                     else if (checkGoal(indexX, indexY, "O") == isDiagFound)
                     {
-                        showEndingScreen("RED");
+                        showEndingScreen("GAGNANT : ROND ROUGE");
                     }
                 }
 
