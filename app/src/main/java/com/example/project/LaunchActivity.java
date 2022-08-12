@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class LaunchActivity extends AppCompatActivity {
     @Override
@@ -23,5 +24,10 @@ public class LaunchActivity extends AppCompatActivity {
         Intent drawingView = new Intent(this, MainActivity.class);
         drawingView.putExtra("Case_number", 4);
         startActivity(drawingView);
+    }
+
+    public void onAboutBtnClicked(View view) {
+        Intent aboutView = new Intent(this, AboutActivity.class);
+        startActivity(aboutView);
     }
 }

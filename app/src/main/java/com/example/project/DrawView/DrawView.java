@@ -166,9 +166,9 @@ public class DrawView extends View {
                 System.out.println("Tx nombre : "+ tX);
                 obj.setStyle(Paint.Style.STROKE);
                 obj.setStrokeWidth(15);
-                if(tabX.size() == (CASE_NUMBER * CASE_NUMBER) ){
-                    showEndingScreen("MATCH NULL");
-                }
+                //  if(tabX.size() == (CASE_NUMBER * CASE_NUMBER) ){
+                //      showEndingScreen("MATCH NULL");
+                //  }
                 if ((tX & 1) == 0) {
                     obj.setColor(Color.GREEN);
                     obj.setTextSize(18);
@@ -184,7 +184,7 @@ public class DrawView extends View {
                         setVictory(tX, canvas, Color.GREEN, isXFound);
 
                         //  Afficher l'activité final
-                        showEndingScreen("GAGNANT : CROIX VERT");
+                        showEndingScreen("Bravo ! Vous avez gagné !");
                         break;
                     }
                     else if (checkGoal(indexX, indexY, "X") == isYFound)
@@ -192,12 +192,12 @@ public class DrawView extends View {
                         setVictory(tX, canvas, Color.GREEN, isYFound);
 
                         //  Afficher l'activité final
-                        showEndingScreen("GAGNANT : CROIX VERT");
+                        showEndingScreen("Bravo ! Vous avez gagné !");
                         break;
                     }
                     else if (checkGoal(indexX, indexY, "X") == isDiagFound)
                     {
-                        showEndingScreen("GAGNANT : CROIX VERT");
+                        showEndingScreen("Bravo ! Vous avez gagné !");
                         break;
                     }
                 }
@@ -213,12 +213,12 @@ public class DrawView extends View {
 
                     matrice[tabIndexX.get(tX)][tabIndexY.get(tX)].drawType = "O";
 
-                    if (checkGoal(indexX, indexY, "O") == isXFound)
+                    /*if (checkGoal(indexX, indexY, "O") == isXFound)
                     {
                         setVictory(tX, canvas, Color.RED, isXFound);
 
                         //  Afficher l'activité final
-                        showEndingScreen("GAGNANT : ROND ROUGE");
+                        showEndingScreen("Bravo ! Vous avez gagné !");
                         break;
                     }
                     else if (checkGoal(indexX, indexY, "O") == isYFound)
@@ -226,14 +226,14 @@ public class DrawView extends View {
                         setVictory(tX, canvas, Color.RED, isYFound);
 
                         //  Afficher l'activité final
-                        showEndingScreen("GAGNANT : ROND ROUGE");
+                        showEndingScreen("Bravo ! Vous avez gagné !");
                         break;
                     }
                     else if (checkGoal(indexX, indexY, "O") == isDiagFound)
                     {
-                        showEndingScreen("GAGNANT : ROND ROUGE");
+                        showEndingScreen("Bravo ! Vous avez gagné !");
                         break;
-                    }
+                    }*/
                 }
 
             }
@@ -277,6 +277,18 @@ public class DrawView extends View {
                         tabIndexX.add(indexX);
                         tabIndexY.add(indexY);
 
+                        /*int goal = checkGoal(x, y, "X");
+                        if (goal == isXFound)
+                        {
+                            System.out.println("Victoire X verte !");
+                            showEndingScreen("VERT X Found");
+                        }
+                        else if (goal == isYFound)
+                        {
+                            System.out.println("Victoire X verte !");
+                            showEndingScreen("VERT Y Found");
+                        }*/
+
                         invalidate();
                         flag = true;
                         return true;
@@ -305,6 +317,21 @@ public class DrawView extends View {
                         tabY.add(matrice[randomX][randomY].centerY);
                         tabIndexX.add(randomX);
                         tabIndexY.add(randomY);
+
+                        matrice[randomX][randomY].drawType = "O";
+
+                        int goal = checkGoal(randomX, randomY, "O");
+                        if (goal == isXFound)
+                        {
+                            System.out.println("Victoire O rouge !");
+                            showEndingScreen("Vous avez perdu !");
+                        }
+                        else if (goal == isYFound)
+                        {
+                            System.out.println("Victoire O rouge !");
+                            showEndingScreen("Vous avez perdu !");
+                        }
+
                         break;
                     }
                     else{

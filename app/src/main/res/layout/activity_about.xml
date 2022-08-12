@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LaunchActivity">
+    tools:context=".AboutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,16 +23,6 @@
             android:textSize="34sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Veuillez choisir le nombre de grille" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
@@ -43,47 +33,51 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button3x3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/buttom"
-                android:onClick="launch3x3"
-                android:text="3x3"
-                android:textColor="@color/white" />
-
-            <Space
-                android:layout_width="15dp"
-                android:layout_height="match_parent" />
-
-            <Button
-                android:id="@+id/button4x4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/buttom"
-                android:onClick="launch4x4"
-                android:text="4x4"
-                android:textColor="@color/white" />
-        </LinearLayout>
+            android:text="Un jeu développé par" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <Button
-            android:id="@+id/buttonAbout"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/buttom"
-            android:onClick="onAboutBtnClicked"
-            android:text="ABOUT"
-            android:textColor="@color/white" />
+            android:text="- ANDONIAINA Nomenjanahary" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- RANDIAMADISON Felana Diamondra" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- BIENVENUE Jean Offman" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Copyright (c) 2022" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
