@@ -3,9 +3,13 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EndingActivity extends AppCompatActivity {
@@ -22,6 +26,15 @@ public class EndingActivity extends AppCompatActivity {
 
         TextView mTextView = (TextView)findViewById(R.id.userGoal);
         mTextView.setText(gameEndingText);
+
+        Button exitBtn = (Button) findViewById(R.id.buttonExit);
+        exitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                System.exit(0);
+            }
+        });
     }
 
     public void onReplayBtnClicked(View viewSource)

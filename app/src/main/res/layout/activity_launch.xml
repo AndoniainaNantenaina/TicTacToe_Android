@@ -15,10 +15,13 @@
         tools:layout_editor_absoluteX="118dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bienvenue dans TICTACTOE" />
+            android:text="TIC TAC TOE"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView2"
@@ -26,25 +29,60 @@
             android:layout_height="wrap_content"
             android:text="Veuillez choisir le nombre de grille" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/tictactoe256" />
 
-        <Button
-            android:id="@+id/button4x4"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="launch4x4"
-            android:text="4x4" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button3x3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttom"
+                android:onClick="launch3x3"
+                android:text="3x3"
+                android:textColor="@color/white" />
+
+            <Space
+                android:layout_width="15dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/button4x4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttom"
+                android:onClick="launch4x4"
+                android:text="4x4"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
         <Button
-            android:id="@+id/button3x3"
+            android:id="@+id/buttonAbout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="launch3x3"
-            android:text="3x3" />
+            android:background="@drawable/buttom"
+            android:text="ABOUT"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

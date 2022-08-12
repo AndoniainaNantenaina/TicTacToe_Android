@@ -20,19 +20,40 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/victorytrophy256" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
         <TextView
             android:id="@+id/userGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="gameEndingText" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
         <Button
             android:id="@+id/replaybtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/Theme.AppCompat"
+            android:background="@drawable/buttom"
             android:onClick="onReplayBtnClicked"
-            android:text="RECOMMENCER" />
+            android:text="REPLAY"
+            android:theme="@style/Theme.AppCompat" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <Button
+            android:id="@+id/buttonExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttom"
+            android:text="EXIT"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
