@@ -58,7 +58,7 @@ public class DrawView extends View {
     int isXFound = 1;
     int isYFound = 2;
     int isDiagFound = 3;
-    int isNotFound = 0;
+    int isDiagReverseFound = 4;
     boolean flag = false;
     Paint paint = new Paint();
     Paint obj = new Paint();
@@ -166,9 +166,7 @@ public class DrawView extends View {
                 System.out.println("Tx nombre : "+ tX);
                 obj.setStyle(Paint.Style.STROKE);
                 obj.setStrokeWidth(15);
-                //  if(tabX.size() == (CASE_NUMBER * CASE_NUMBER) ){
-                //      showEndingScreen("MATCH NULL");
-                //  }
+
                 if ((tX & 1) == 0) {
                     obj.setColor(Color.GREEN);
                     obj.setTextSize(18);
@@ -179,27 +177,34 @@ public class DrawView extends View {
 
                     matrice[tabIndexX.get(tX)][tabIndexY.get(tX)].drawType = "X";
 
-                    if (checkGoal(indexX, indexY, "X") == isXFound)
-                    {
-                        setVictory(tX, canvas, Color.GREEN, isXFound);
+                    if(checkGoalX(indexX, "X")){
+                        setVictory(indexX, canvas, Color.GREEN, isXFound);
+                        showEndingScreen("Bravo ! Vous avez gagné !");
+                        break;
+                    }
 
-                        //  Afficher l'activité final
+                    else if(checkGoalY(indexY, "X")){
+                        setVictory(indexY, canvas, Color.GREEN, isYFound);
                         showEndingScreen("Bravo ! Vous avez gagné !");
                         break;
                     }
-                    else if (checkGoal(indexX, indexY, "X") == isYFound)
-                    {
-                        setVictory(tX, canvas, Color.GREEN, isYFound);
+                    else if(indexX == indexY){
+                        if (checkGoalDiag(indexX,indexY , "X"))
+                        {
+                            setVictory(indexX, canvas, Color.GREEN, isDiagFound);
+                            showEndingScreen("Bravo ! Vous avez gagné !");
+                            break;
+                        }
+                    }
+                    else if(indexX + indexY == CASE_NUMBER-1){
+                        if (checkGoalDiagReverse(indexX,indexY , "X"))
+                        {
+                            setVictory(indexX, canvas, Color.GREEN, isDiagReverseFound);
+                            showEndingScreen("Bravo ! Vous avez gagné !");
+                            break;
+                        }
+                    }
 
-                        //  Afficher l'activité final
-                        showEndingScreen("Bravo ! Vous avez gagné !");
-                        break;
-                    }
-                    else if (checkGoal(indexX, indexY, "X") == isDiagFound)
-                    {
-                        showEndingScreen("Bravo ! Vous avez gagné !");
-                        break;
-                    }
                 }
                 else
                 {
@@ -213,27 +218,37 @@ public class DrawView extends View {
 
                     matrice[tabIndexX.get(tX)][tabIndexY.get(tX)].drawType = "O";
 
-                    /*if (checkGoal(indexX, indexY, "O") == isXFound)
+                    if (checkGoalX(tabIndexX.get(tX), "O"))
                     {
-                        setVictory(tX, canvas, Color.RED, isXFound);
-
-                        //  Afficher l'activité final
-                        showEndingScreen("Bravo ! Vous avez gagné !");
-                        break;
+                        setVictory(tabIndexX.get(tX), canvas, Color.RED, isXFound);
+                        showEndingScreen("Vous avez perdu ! Gagnant : Rouge");
                     }
-                    else if (checkGoal(indexX, indexY, "O") == isYFound)
-                    {
-                        setVictory(tX, canvas, Color.RED, isYFound);
 
-                        //  Afficher l'activité final
-                        showEndingScreen("Bravo ! Vous avez gagné !");
-                        break;
+                    else if(checkGoalY(tabIndexY.get(tX), "O")){
+                        setVictory(tabIndexY.get(tX), canvas, Color.RED, isYFound);
+                        showEndingScreen("Vous avez perdu ! Gagnant : Rouge");
                     }
-                    else if (checkGoal(indexX, indexY, "O") == isDiagFound)
-                    {
-                        showEndingScreen("Bravo ! Vous avez gagné !");
-                        break;
-                    }*/
+
+                    else if(tabIndexX.get(tX) == tabIndexY.get(tX)){
+                        if (checkGoalDiag(tabIndexX.get(tX),tabIndexY.get(tX) , "O"))
+                        {
+                            setVictory(tabIndexX.get(tX), canvas, Color.RED, isDiagFound);
+                            showEndingScreen("Vous avez perdu ! Gagnant : Rouge");
+                            break;
+                        }
+                    }
+                    else if(tabIndexX.get(tX) + tabIndexY.get(tX) == CASE_NUMBER-1){
+                        if (checkGoalDiagReverse(tabIndexX.get(tX),tabIndexY.get(tX) , "O"))
+                        {
+                            setVictory(tabIndexX.get(tX), canvas, Color.RED, isDiagReverseFound);
+                            showEndingScreen("Vous avez perdu ! Gagnant : Rouge");
+                            break;
+                        }
+                    }
+                }
+                if(tabX.size() == (CASE_NUMBER * CASE_NUMBER) ){
+                    showEndingScreen("MATCH NULL");
+                    break;
                 }
 
             }
@@ -277,18 +292,6 @@ public class DrawView extends View {
                         tabIndexX.add(indexX);
                         tabIndexY.add(indexY);
 
-                        /*int goal = checkGoal(x, y, "X");
-                        if (goal == isXFound)
-                        {
-                            System.out.println("Victoire X verte !");
-                            showEndingScreen("VERT X Found");
-                        }
-                        else if (goal == isYFound)
-                        {
-                            System.out.println("Victoire X verte !");
-                            showEndingScreen("VERT Y Found");
-                        }*/
-
                         invalidate();
                         flag = true;
                         return true;
@@ -319,19 +322,6 @@ public class DrawView extends View {
                         tabIndexY.add(randomY);
 
                         matrice[randomX][randomY].drawType = "O";
-
-                        int goal = checkGoal(randomX, randomY, "O");
-                        if (goal == isXFound)
-                        {
-                            System.out.println("Victoire O rouge !");
-                            showEndingScreen("Vous avez perdu !");
-                        }
-                        else if (goal == isYFound)
-                        {
-                            System.out.println("Victoire O rouge !");
-                            showEndingScreen("Vous avez perdu !");
-                        }
-
                         break;
                     }
                     else{
@@ -349,34 +339,8 @@ public class DrawView extends View {
         return true;
     }
 
-    public int checkGoal(int indexX, int indexY, String drawType)
-    {
+    public boolean checkGoalX(int indexX, String drawType){
         int nbCheckedX = 0;
-        int nbCheckedY = 0;
-        int nbCheckedDiag = 0;
-        int nbCheckedDiagReverse = 0;
-
-        if(indexX == indexY){
-            for (int x=0; x < CASE_NUMBER; x++)
-            {
-                if (matrice[x][x].drawType.equals(drawType))
-                {
-                    nbCheckedDiag++;
-                }
-            }
-        }
-
-        if(indexX + indexY == CASE_NUMBER-1){
-            for (int x=CASE_NUMBER-1; x >= 0; x--)
-            {
-                int iY = (CASE_NUMBER - 1) - x;
-                if (matrice[x][iY].drawType.equals(drawType))
-                {
-                    nbCheckedDiagReverse++;
-                }
-            }
-        }
-
         //  Itération sur X
         for (int x=0; x < CASE_NUMBER; x++)
         {
@@ -385,6 +349,14 @@ public class DrawView extends View {
                 nbCheckedX++;
             }
         }
+        if(nbCheckedX == CASE_NUMBER){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkGoalY(int indexY, String drawType){
+        int nbCheckedY = 0;
 
         //  Itération sur Y
         for (int y=0; y < CASE_NUMBER; y++)
@@ -394,28 +366,43 @@ public class DrawView extends View {
                 nbCheckedY++;
             }
         }
-
-        if (nbCheckedX == CASE_NUMBER)
-        {
-            return isXFound;
+        if(nbCheckedY == CASE_NUMBER){
+            return true;
         }
+        return false;
+    }
 
-        if (nbCheckedY == CASE_NUMBER)
+    public boolean checkGoalDiagReverse(int indexX, int indexY, String drawType){
+        int nbCheckedDiagReverse = 0;
+        for (int x=CASE_NUMBER-1; x >= 0; x--)
         {
-            return isYFound;
+            int iY = (CASE_NUMBER - 1) - x;
+            if (matrice[x][iY].drawType.equals(drawType))
+            {
+                nbCheckedDiagReverse++;
+            }
         }
+        if (nbCheckedDiagReverse == CASE_NUMBER){
+            return true;
+        }
+        return false;
+    }
 
-        if (nbCheckedDiag == CASE_NUMBER)
+    public boolean checkGoalDiag(int indexX, int indexY, String drawType)
+    {
+        int nbCheckedDiag = 0;
+
+        for (int x=0; x < CASE_NUMBER; x++)
         {
-            return isDiagFound;
+            if (matrice[x][x].drawType.equals(drawType))
+            {
+                nbCheckedDiag++;
+            }
         }
-
-        if (nbCheckedDiagReverse == CASE_NUMBER)
-        {
-            return isDiagFound;
+        if(nbCheckedDiag == CASE_NUMBER){
+            return true;
         }
-
-        return isNotFound;
+        return false;
     }
 
     public void setCASE_NUMBER(int M_CASE_NUMBER)
@@ -450,10 +437,10 @@ public class DrawView extends View {
                 Paint p = new Paint();
                 p.setColor(color);
                 canvas.drawRect(
-                        matrice[tabIndexY.get(tX)][v].left,
-                        matrice[tabIndexY.get(tX)][v].top,
-                        matrice[tabIndexY.get(tX)][v].right,
-                        matrice[tabIndexY.get(tX)][v].bottom,
+                        matrice[tX][v].left,
+                        matrice[tX][v].top,
+                        matrice[tX][v].right,
+                        matrice[tX][v].bottom,
                         p
                 );
             }
@@ -468,10 +455,42 @@ public class DrawView extends View {
                 Paint p = new Paint();
                 p.setColor(color);
                 canvas.drawRect(
-                        matrice[v][tabIndexY.get(tX)].left,
-                        matrice[v][tabIndexY.get(tX)].top,
-                        matrice[v][tabIndexY.get(tX)].right,
-                        matrice[v][tabIndexY.get(tX)].bottom,
+                        matrice[v][tX].left,
+                        matrice[v][tX].top,
+                        matrice[v][tX].right,
+                        matrice[v][tX].bottom,
+                        p
+                );
+            }
+        }
+        else if(foundType == isDiagFound)
+        {
+            for (int v = 0; v < CASE_NUMBER; v++)
+            {
+                Paint p = new Paint();
+                p.setColor(color);
+                canvas.drawRect(
+                        matrice[v][v].left,
+                        matrice[v][v].top,
+                        matrice[v][v].right,
+                        matrice[v][v].bottom,
+                        p
+                );
+            }
+        }
+        else if(foundType == isDiagReverseFound)
+        {
+
+            for (int v = CASE_NUMBER-1; v >= 0; v--)
+            {
+                int y = (CASE_NUMBER -1) -v;
+                Paint p = new Paint();
+                p.setColor(color);
+                canvas.drawRect(
+                        matrice[v][y].left,
+                        matrice[v][y].top,
+                        matrice[v][y].right,
+                        matrice[v][y].bottom,
                         p
                 );
             }
